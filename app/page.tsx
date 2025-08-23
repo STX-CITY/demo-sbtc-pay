@@ -1,6 +1,3 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import CustomerLookup from '@/components/CustomerLookup';
@@ -18,33 +15,32 @@ interface Product {
   checkout_url: string;
 }
 
-export default function HomePage() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default async function HomePage() {
+  // Fetch products from sBTC Pay API
+  let products: Product[] = [];
+  try {
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setIsLoading(true);
-        const response = await fetch('/api/products');
-        
-        if (response.ok) {
-          const data = await response.json();
-          setProducts(data.products || []);
-        } else {
-          setError('Failed to fetch products');
-        }
-      } catch (err) {
-        console.error('Error fetching products:', err);
-        setError('Error loading products');
-      } finally {
-        setIsLoading(false);
-      }
-    };
 
-    fetchProducts();
-  }, []);
+    
+    const url = `${process.env.SBTC_PAY_API_URL}/api/v1/products`;
+    console.log(url);
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.SBTC_PAY_API_KEY}`,
+      },
+      cache: 'no-store',
+    });
+
+
+    
+    if (response.ok) {
+      const data = await response.json();
+      products = data.data || [];
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
 
 
   return (
@@ -118,19 +114,7 @@ export default function HomePage() {
               Discover our collection of digital products, all purchasable with secure Bitcoin payments
             </p>
           </div>
-          {isLoading ? (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-6 animate-pulse">⏳</div>
-              <h3 className="text-2xl font-medium text-gray-900 mb-4">Loading products...</h3>
-              <p className="text-lg text-gray-600">Please wait while we fetch available products</p>
-            </div>
-          ) : error ? (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-6">⚠️</div>
-              <h3 className="text-2xl font-medium text-gray-900 mb-4">Error loading products</h3>
-              <p className="text-lg text-gray-600">{error}</p>
-            </div>
-          ) : products.length === 0 ? (
+          {products.length === 0 ? (
             <div className="text-center py-16">
               <div className="text-6xl mb-6">📦</div>
               <h3 className="text-2xl font-medium text-gray-900 mb-4">No products available</h3>
