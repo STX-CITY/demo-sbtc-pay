@@ -2,7 +2,6 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import CustomerLookup from '@/components/CustomerLookup';
 
-const SBTC_PAY_API_URL = process.env.SBTC_PAY_API_URL || 'http://localhost:3000';
 
 
 interface Product {
@@ -21,8 +20,10 @@ export default async function HomePage() {
   let products: Product[] = [];
   try {
 
-    
-    const response = await fetch(`${SBTC_PAY_API_URL}/api/v1/products`, {
+    const url = `${process.env.SBTC_PAY_API_URL}/api/v1/products`;
+    console.log(url);
+    alert(url);
+    const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.SBTC_PAY_API_KEY}`,
