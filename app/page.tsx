@@ -20,9 +20,10 @@ export default async function HomePage() {
   let products: Product[] = [];
   try {
 
+
+    debugger;
     const url = `${process.env.SBTC_PAY_API_URL}/api/v1/products`;
     console.log(url);
-    alert(url);
     const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
