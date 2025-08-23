@@ -1,103 +1,166 @@
-import Image from "next/image";
+import Link from 'next/link';
+import ProductCard from '@/components/ProductCard';
+import CustomerLookup from '@/components/CustomerLookup';
 
-export default function Home() {
+const SBTC_PAY_API_URL = process.env.SBTC_PAY_API_URL || 'http://localhost:3000';
+
+
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  price_usd?: number;
+  images?: string[];
+  created: number;
+  checkout_url: string;
+}
+
+export default async function HomePage() {
+  // Fetch products from sBTC Pay API
+  let products: Product[] = [];
+  try {
+
+    
+    const response = await fetch(`${SBTC_PAY_API_URL}/api/v1/products`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.SBTC_PAY_API_KEY}`,
+      },
+      cache: 'no-store',
+    });
+
+
+    
+    if (response.ok) {
+      const data = await response.json();
+      products = data.data || [];
+    }
+  } catch (error) {
+    console.error('Error fetching products:', error);
+  }
+
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold text-gray-900">
+                🛒 sBTC Digital Store
+              </h1>
+              <span className="ml-2 px-2 py-1 bg-orange-100 text-orange-800 text-xs font-semibold rounded">
+                Pay with Bitcoin
+              </span>
+            </div>
+            <nav className="flex space-x-8">
+              <Link href="/products" className="text-gray-600 hover:text-gray-900">
+                All Products
+              </Link>
+            </nav>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white py-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              Digital Products with
+              <span className="bg-gradient-to-r from-orange-300 to-yellow-300 bg-clip-text text-transparent"> Bitcoin Payments</span>
+            </h2>
+            <p className="text-xl md:text-2xl mb-10 opacity-90 leading-relaxed">
+              Purchase digital products securely with sBTC - the future of Bitcoin payments on Stacks
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/products"
+                className="inline-block bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
+              >
+                🛒 Browse Products
+              </Link>
+              <Link
+                href="#check-payments"
+                className="inline-block bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-blue-600 transition-all"
+              >
+                🔍 Check My Payments
+              </Link>
+            </div>
+          </div>
+        </div>
+        
+        {/* Decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-10 rounded-full"></div>
+          <div className="absolute top-40 right-20 w-16 h-16 bg-orange-300 bg-opacity-20 rounded-full"></div>
+          <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-yellow-300 bg-opacity-15 rounded-full"></div>
+        </div>
+      </section>
+
+      {/* Customer Lookup */}
+      <CustomerLookup />
+
+      {/* All Products */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Available Products</h3>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Discover our collection of digital products, all purchasable with secure Bitcoin payments
+            </p>
+          </div>
+          {products.length === 0 ? (
+            <div className="text-center py-16">
+              <div className="text-6xl mb-6">📦</div>
+              <h3 className="text-2xl font-medium text-gray-900 mb-4">No products available</h3>
+              <p className="text-lg text-gray-600">Check back later for new products!</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="mb-6">
+              <h3 className="text-2xl font-bold mb-2">🛒 sBTC Digital Store</h3>
+              <p className="text-gray-300 text-lg">Secure Bitcoin Payments for the Digital Age</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-8 text-sm">
+              <div>
+                <h4 className="font-semibold text-orange-400 mb-2">🔒 Security</h4>
+                <p className="text-gray-400">Powered by sBTC on Stacks blockchain for secure, decentralized payments</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-blue-400 mb-2">⚡ Fast</h4>
+                <p className="text-gray-400">Instant digital product delivery upon successful Bitcoin payment</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-purple-400 mb-2">🌐 Global</h4>
+                <p className="text-gray-400">Accept Bitcoin payments from customers worldwide, 24/7</p>
+              </div>
+            </div>
+            
+            <div className="border-t border-gray-700 pt-6">
+              <p className="text-gray-400 text-sm">
+                © 2025 sBTC Digital Store • Built with sBTC Pay • Demo Application
+              </p>
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
 }
+
