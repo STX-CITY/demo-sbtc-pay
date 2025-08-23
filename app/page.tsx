@@ -128,6 +128,27 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Use sBTCPay */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">Use sBTCPay</h3>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+              sBTCPay is a Bitcoin payment processor that enables seamless Bitcoin transactions on the Stacks blockchain. 
+              Build your own Bitcoin-powered applications with our developer-friendly APIs and tools.
+            </p>
+            <Link
+              href="https://sbtcpay.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-orange-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-orange-700 transition-all transform hover:scale-105 shadow-lg"
+            >
+              🚀 Visit sBTCPay.org
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
