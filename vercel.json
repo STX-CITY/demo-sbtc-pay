@@ -1,0 +1,19 @@
+{
+  "rewrites": [
+    {
+      "source": "/test_form",
+      "destination": "/test_form.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/test_form.html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html"
+        }
+      ]
+    }
+  ]
+}
