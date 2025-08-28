@@ -2,12 +2,38 @@
 
 import { useEffect } from 'react';
 
+interface PaymentIntent {
+  id: string;
+  amount: number;
+  [key: string]: unknown;
+}
+
+interface SBTCPayWindow extends Window {
+  SBTCPay?: {
+    createCheckout: (config: {
+      containerId: string;
+      productId: string;
+      apiKey: string;
+      style: {
+        width: string;
+        height: string;
+        borderRadius: string;
+        primaryColor: string;
+        theme: string;
+      };
+      onSuccess: (paymentIntent: PaymentIntent) => void;
+      onError: (error: Error) => void;
+      onCancel: () => void;
+    }) => void;
+  };
+}
+
 export default function TestFormPage() {
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://sbtcpay.org/embed/checkout.js';
     script.onload = function() {
-      (window as any).SBTCPay.createCheckout({
+      (window as SBTCPayWindow).SBTCPay?.createCheckout({
         containerId: 'sbtc-checkout-prod_tvXG_9G50M6ycAJf',
         productId: 'prod_tvXG_9G50M6ycAJf',
         apiKey: 'pk_test_bKtnwPcfUSvyFyr28CVaMmxL0LmIvupZ',
@@ -18,10 +44,10 @@ export default function TestFormPage() {
           primaryColor: '#3B82F6',
           theme: 'light'
         },
-        onSuccess: function(paymentIntent: any) {
+        onSuccess: function(paymentIntent: PaymentIntent) {
           console.log('Payment successful:', paymentIntent);
         },
-        onError: function(error: any) {
+        onError: function(error: Error) {
           console.error('Payment error:', error);
         },
         onCancel: function() {
