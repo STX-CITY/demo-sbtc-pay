@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 interface Product {
   id: string;
   name: string;
@@ -18,12 +20,13 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
-      <div className="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+      <div className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
         {product.images && product.images.length > 0 ? (
-          <img 
+          <Image 
             src={product.images[0]} 
             alt={product.name}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
         ) : (
           <span className="text-4xl text-white">📱</span>

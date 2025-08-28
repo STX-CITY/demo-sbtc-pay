@@ -41,14 +41,23 @@ function verifyWebhookSignature(
   }
 }
 
-async function handlePaymentIntentCreated(paymentIntent: any) {
+interface PaymentIntent {
+  id: string;
+  amount: number;
+  customer_email?: string;
+  metadata?: Record<string, string>;
+  tx_id?: string;
+  receipt_url?: string;
+}
+
+async function handlePaymentIntentCreated(paymentIntent: PaymentIntent) {
   console.log('New payment intent created:', paymentIntent.id);
   console.log('Amount:', paymentIntent.amount);
   console.log('Customer:', paymentIntent.customer_email);
   console.log('Metadata:', paymentIntent.metadata);
 }
 
-async function handlePaymentIntentSucceeded(paymentIntent: any) {
+async function handlePaymentIntentSucceeded(paymentIntent: PaymentIntent) {
   console.log('Payment succeeded:', paymentIntent.id);
   console.log('Transaction ID:', paymentIntent.tx_id);
   console.log('Receipt URL:', paymentIntent.receipt_url);
@@ -59,7 +68,7 @@ async function handlePaymentIntentSucceeded(paymentIntent: any) {
   }
 }
 
-async function handlePaymentIntentFailed(paymentIntent: any) {
+async function handlePaymentIntentFailed(paymentIntent: PaymentIntent) {
   console.log('Payment failed:', paymentIntent.id);
   console.log('Failure reason:', paymentIntent.metadata?.failure_reason);
   
@@ -68,7 +77,7 @@ async function handlePaymentIntentFailed(paymentIntent: any) {
   }
 }
 
-async function handlePaymentIntentCanceled(paymentIntent: any) {
+async function handlePaymentIntentCanceled(paymentIntent: PaymentIntent) {
   console.log('Payment canceled:', paymentIntent.id);
   console.log('Order ID:', paymentIntent.metadata?.order_id);
 }
