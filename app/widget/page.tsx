@@ -3,7 +3,7 @@ import Script from 'next/script';
 export default function WidgetPage() {
   return (
     <>
-      <Script src="http://localhost:3000/widget.js" strategy="afterInteractive" />
+      <Script src="https://sbtcpay.org/widget.js" strategy="afterInteractive" />
       
       <div className="container mx-auto p-8">
         <h1 className="text-2xl font-bold mb-6">sBTC Payment Widget Demo</h1>
