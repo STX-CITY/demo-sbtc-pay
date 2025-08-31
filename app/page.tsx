@@ -102,6 +102,57 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* sBTC Payment Widget Demo Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">💳 sBTC Payment Widget Demo</h3>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+              Experience our seamless Bitcoin payment widget in action. See how easy it is to integrate sBTC payments into your application.
+            </p>
+            <Link
+              href="/widget"
+              className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg"
+            >
+              🚀 Try Widget Demo
+            </Link>
+          </div>
+          
+          {/* Widget Preview Card */}
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200 shadow-sm">
+              <div className="text-center mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-4">
+                  <span className="text-2xl">🪙</span>
+                </div>
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">Interactive Payment Widget</h4>
+                <p className="text-gray-600">
+                  Our widget provides a complete payment experience with real-time Bitcoin transactions
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-4 text-sm">
+                <div className="text-center p-4 bg-white rounded-lg">
+                  <div className="text-2xl mb-2">⚡</div>
+                  <div className="font-medium text-gray-900">Instant Setup</div>
+                  <div className="text-gray-600">One-line integration</div>
+                </div>
+                <div className="text-center p-4 bg-white rounded-lg">
+                  <div className="text-2xl mb-2">🔒</div>
+                  <div className="font-medium text-gray-900">Secure Payments</div>
+                  <div className="text-gray-600">sBTC on Stacks</div>
+                </div>
+                <div className="text-center p-4 bg-white rounded-lg">
+                  <div className="text-2xl mb-2">🎨</div>
+                  <div className="font-medium text-gray-900">Customizable</div>
+                  <div className="text-gray-600">Match your brand</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Customer Lookup */}
       <CustomerLookup />
 
