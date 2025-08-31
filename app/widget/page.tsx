@@ -10,8 +10,8 @@ export default function WidgetPage() {
         
         {/* sBTC Inline Widget */}
         <div data-sbtc-widget
-             data-sbtc-key="pk_test_bKtnwPcfUSvyFyr28CVaMmxL0LmIvupZ"
-             data-product-id="prod_tvXG_9G50M6ycAJf"
+             data-sbtc-key="pk_test_XFVEe_ToHEQ31w0f1oQpcGAO4HI9qZca"
+             data-product-id="prod_fcp_JpCwaWsKUU8Z"
              data-theme="light"
              data-color="#3B82F6"
              data-type="inline"
