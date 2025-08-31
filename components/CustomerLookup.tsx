@@ -86,9 +86,31 @@ export default function CustomerLookup() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Check Your Payments</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
             Enter your email address or Bitcoin address to view your complete payment history and purchased products
           </p>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-3xl mx-auto">
+            <p className="text-sm text-blue-800 mb-2">
+              <span className="font-semibold">Demo Feature:</span> This uses the sBTC Pay API GET /customers endpoint from{' '}
+              <a 
+                href="https://sbtcpay.org/docs#api" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="underline hover:text-blue-900"
+              >
+                https://sbtcpay.org/docs#api
+              </a>
+            </p>
+            <p className="text-sm text-blue-700">
+              💡 <span className="font-medium">Try sample customer:</span>{' '}
+              <button
+                onClick={() => setIdentifier('alex@gmail.com')}
+                className="font-mono bg-blue-100 hover:bg-blue-200 px-2 py-1 rounded text-blue-900 transition-colors"
+              >
+                alex@gmail.com
+              </button>
+            </p>
+          </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-100">
