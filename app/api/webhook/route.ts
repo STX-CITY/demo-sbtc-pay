@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 
-const WEBHOOK_SECRET = process.env.SBTC_WEBHOOK_SECRET || '47684ea26346c3f77d6422b53af0160d2278597827bc1ed9c507e979c34b8f95';
+const WEBHOOK_SECRET = process.env.SBTC_WEBHOOK_SECRET || 'bf4a6879c3bafcda6bd6374545744c7756cb01c15e90a315b685f4661c8ca9ed';
 
 const processedEvents = new Map<string, boolean>();
 

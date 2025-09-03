@@ -33,7 +33,7 @@ export default function WidgetPage() {
           <ol className="list-decimal list-inside space-y-2 text-gray-700 mb-4">
             <li>Copy the generated code below</li>
             <li>Replace the placeholder API key with your public key</li>
-            <li>Paste the code into your website's HTML</li>
+            <li>Paste the code into your website&apos;s HTML</li>
             <li>The widget will automatically load and handle payments</li>
           </ol>
           
