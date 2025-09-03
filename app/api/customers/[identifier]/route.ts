@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 const SBTC_PAY_API_URL = process.env.SBTC_PAY_API_URL || 'http://localhost:3000';
 const SBTC_PAY_API_KEY = process.env.SBTC_PAY_API_KEY;
 
+
+export const revalidate = 0;
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ identifier: string }> }

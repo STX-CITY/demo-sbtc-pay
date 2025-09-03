@@ -99,7 +99,8 @@ export default function CustomerLookup() {
                 className="underline hover:text-blue-900"
               >
                 https://sbtcpay.org/docs#api
-              </a>
+              </a> 
+              <span> and it can only show payments for purchases from this website</span>
             </p>
             <p className="text-sm text-blue-700">
               💡 <span className="font-medium">Try sample customer:</span>{' '}
