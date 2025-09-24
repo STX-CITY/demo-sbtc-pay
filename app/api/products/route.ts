@@ -13,6 +13,7 @@ export async function GET() {
       cache: 'no-store',
     });
 
+    console.log('testing testing')
     if (response.ok) {
       const data = await response.json();
       return NextResponse.json({ products: data.data || [] });
